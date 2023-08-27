@@ -1,0 +1,24 @@
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA36MHAXGHPK6DB4K7
+      secret-key: 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
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
+s3:
+  endpoint: https://s3.console.aws.amazon.com # Replace with your S3 endpoint if necessary
+  bucket: slydo-qr-code-bucket # Replace with your bucket name
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+server:
+  port: 9090

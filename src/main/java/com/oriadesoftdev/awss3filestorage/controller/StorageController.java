@@ -1,14 +1,19 @@
 package com.oriadesoftdev.awss3filestorage.controller;
 
+import com.oriadesoftdev.awss3filestorage.data.request.QRCodeRequestBody;
 import com.oriadesoftdev.awss3filestorage.service.AWSS3StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/")
+@Validated
 public class StorageController {
 
     @Autowired
@@ -16,26 +21,21 @@ public class StorageController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(
-            @RequestBody String url
-    ) {
+            @Valid @RequestBody QRCodeRequestBody requestBody
+            ) {
         return new ResponseEntity<>(
-                storageService.uploadFile(url),
+                storageService.uploadFile(requestBody),
                 HttpStatus.OK
         );
     }
 
     @PostMapping("/upload/default")
     public ResponseEntity<String> uploadFile() {
-        String result = storageService.uploadFile("https://www.slydo.co/users/oriade");
-        if (result != null)
-            return new ResponseEntity<>(
+        String result = storageService.uploadFile(new QRCodeRequestBody("https://www.slydo.co/users/oriade" ,""));
+        return new ResponseEntity<>(
                     result,
                     HttpStatus.OK
             );
-        return new ResponseEntity<>(
-                null,
-                HttpStatus.NOT_ACCEPTABLE
-        );
     }
 
     @GetMapping("/download/{filename}")

@@ -25,6 +25,8 @@ dependencies {
 	implementation("io.github.g0dkar:qrcode-kotlin-jvm:3.3.0")
 	implementation("org.jfree:org.jfree.svg:5.0.3")
 
+	implementation 'javax.validation:validation-api:2.0.1.Final' // Replace with the latest version
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'

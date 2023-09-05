@@ -5,7 +5,10 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.text.MessageFormat;
 
 @Service
@@ -27,5 +30,21 @@ public class StaticResourceService {
 
     public Path getPathToSlydoLogo() throws IOException {
         return getPathToStaticFile(ROUNDED_SLYDO_LOGO);
+    }
+
+    public void saveFile(InputStream inputStream, String directory, String fileName) throws IOException {
+        // Get the static resource directory as a resource
+        Resource resource = resourceLoader.getResource(String.format("classpath:static/%1$s", directory));
+
+        // Create the directory if it doesn't exist
+        if (!resource.exists()) {
+            Files.createDirectories(Path.of(resource.getURI()));
+        }
+
+        // Define the file path where the file will be saved
+        Path filePath = Path.of(resource.getURI()).resolve(fileName);
+
+        // Copy the input stream to the file
+        Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
     }
 }

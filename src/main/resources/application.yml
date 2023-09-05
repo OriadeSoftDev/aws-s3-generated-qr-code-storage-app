@@ -1,8 +1,8 @@
 cloud:
   aws:
     credentials:
-      access-key:
-      secret-key:
+      access-key: # Replace with your AWS ACCESS Key
+      secret-key: # Replace with your AWS SECRET Key
     region:
       static: us-east-1
     stack:

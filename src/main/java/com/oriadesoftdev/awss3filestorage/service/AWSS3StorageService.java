@@ -83,10 +83,10 @@ public class AWSS3StorageService {
                     .key(bucketKey)
                     .build();
             s3Client.putObject(putObjectRequest, outputFile.toPath());
-//            if (httpStatus == HttpStatus.OK)
-//                if (logoPath.toFile().exists())
-//                    logoPath.toFile().delete();
-//            outputFile.delete();
+            if (httpStatus == HttpStatus.OK)
+                if (logoPath.toFile().exists())
+                    logoPath.toFile().delete();
+            outputFile.delete();
             System.out.println("File uploaded successfully to S3 bucket.");
             return String.format("%1$s uploaded successfully", qrCodeFileName);
 
